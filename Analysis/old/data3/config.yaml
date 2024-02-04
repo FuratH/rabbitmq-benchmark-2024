@@ -1,0 +1,40 @@
+tasks:
+  - delay: 2
+    action: "single"
+  - delay: 10
+    action: "all"
+  - delay: 15
+    action: "all"
+  - delay: 20
+    action: "single"
+  - delay: 30
+    action: "single"
+  - delay: 40
+    action: "all"
+  - delay: 45
+    action: "all"
+  - delay: 50
+    action: "single"
+  - delay: 55
+    action: "single"
+
+workload:
+  name: "1kb10p10c60min"
+  messageSize: 1
+  producers: 10
+  consumers: 10
+  producerRate: 100000
+  warmupDurationMinutes: 0
+  runtimeDurtationMinutes: 60
+  outputFile: "1kb10p10c60min.txt"
+  seed: 28072000
+
+connectionConfig:
+  amqpUris:
+    - "amqp://alice:password@loadbalancer:5672"
+  primaryBrokerUri: "amqp://alice:password@loadbalancer:5672"
+
+serverUrls:
+  - "http://slavenode0:5000"
+  - "http://slavenode1:5000"
+  - "http://masternode:5000"
