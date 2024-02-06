@@ -1,10 +1,22 @@
 tasks:
-  - delay: 1
+  - delay: 12
+    action: "slave"
+  - delay: 14
     action: "master"
-  - delay: 3
+  - delay: 18
+    action: "all"
+  - delay: 25
+    action: "slave"
+  - delay: 30
     action: "master"
-  - delay: 5
+  - delay: 40
     action: "master"
+  - delay: 45
+    action: "slave"
+  - delay: 50
+    action: "all"
+  - delay: 55
+    action: "slave"
 
 workload:
   name: "1MB10p10c60min"
