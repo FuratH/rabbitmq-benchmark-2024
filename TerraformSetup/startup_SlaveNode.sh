@@ -131,7 +131,7 @@ sudo ufw allow 5000/tcp
 
 git clone https://github.com/FuratH/rabbitmq-benchmark-2024.git
 
-python3 rabbitmq-benchmark-2024/Failureinjector/server.py
+sudo python3 rabbitmq-benchmark-2024/Failureinjector/server.py
 
 
 touch /complete

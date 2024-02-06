@@ -41,10 +41,10 @@ def calculate_recovery_times(df):
 
 # File paths (update these with your actual file paths)
 
-file_masternode = 'data3/masternode_5000_monitoring.log'
-file_slavenode0 = 'data3/slavenode0_5000_monitoring.log'
-file_slavenode1 = 'data3/slavenode1_5000_monitoring.log'
-file_messages = 'data3/results.txt'
+file_masternode = 'old/data3/masternode_5000_monitoring.log'
+file_slavenode0 = 'old/data3/slavenode0_5000_monitoring.log'
+file_slavenode1 = 'old/data3/slavenode1_5000_monitoring.log'
+file_messages = 'old/data3/results.txt'
 # Loading and parsing each log file
 df_masternode = load_and_parse_log(file_masternode)
 df_slavenode0 = load_and_parse_log(file_slavenode0)

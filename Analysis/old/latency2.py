@@ -66,10 +66,10 @@ def parse_latency_data(file_path):
     return df
 
 # File paths
-file_path_masternode = 'data6/masternode_5000_monitoring.log'
-file_path_slavenode0 = 'data6/slavenode0_5000_monitoring.log'
-file_path_slavenode1 = 'data6/slavenode1_5000_monitoring.log'
-file_path_latency = 'data6/results.csv'  # File path for latency data
+file_path_masternode = 'old/data6/masternode_5000_monitoring.log'
+file_path_slavenode0 = 'old/data6/slavenode0_5000_monitoring.log'
+file_path_slavenode1 = 'old/data6/slavenode1_5000_monitoring.log'
+file_path_latency = 'old/data6/results.csv'  # File path for latency data
 
 # Parse each log file
 df_masternode = parse_log(file_path_masternode)

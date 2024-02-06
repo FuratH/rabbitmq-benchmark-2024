@@ -64,10 +64,10 @@ def was_master_during_downtime(intervals, df_messages, node_name, start_time):
     return master_downtimes
 
 # File paths
-file_path_node0 = 'data17/node0_5000_monitoring.log'
-file_path_node1 = 'data17/node1_5000_monitoring.log'
-file_path_node2 = 'data17/node2_5000_monitoring.log'
-file_path_messages = 'data17/results.csv'
+file_path_node0 = 'run1/node0_5000_monitoring.log'
+file_path_node1 = 'run1/node1_5000_monitoring.log'
+file_path_node2 = 'run1/node2_5000_monitoring.log'
+file_path_messages = 'run1/results.csv'
 
 # Parse each log file and get start times
 df_node0, start_time_node0 = parse_log(file_path_node0)

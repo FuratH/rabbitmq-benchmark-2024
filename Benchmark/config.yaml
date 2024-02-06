@@ -23,7 +23,7 @@ workload:
   messageSize: 1
   producers: 10
   consumers: 10
-  runtimeDurtationMinutes: 8
+  runtimeDurtationMinutes: 60
   seed: 28072000
 
 connectionConfig:

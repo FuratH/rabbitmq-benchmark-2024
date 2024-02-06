@@ -50,9 +50,9 @@ def calculate_average_recovery_time(intervals):
     return average_time
 
 # File paths
-file_path_masternode = 'data3/masternode_5000_monitoring.log'
-file_path_slavenode0 = 'data3/slavenode0_5000_monitoring.log'
-file_path_slavenode1 = 'data3/slavenode1_5000_monitoring.log'
+file_path_masternode = 'old/data3/masternode_5000_monitoring.log'
+file_path_slavenode0 = 'old/data3/slavenode0_5000_monitoring.log'
+file_path_slavenode1 = 'old/data3/slavenode1_5000_monitoring.log'
 
 
 # Parse each log file

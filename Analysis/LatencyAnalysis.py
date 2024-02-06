@@ -5,7 +5,7 @@ import seaborn as sns
 
 
 # Reading the CSV file
-file_path = 'data18/results.csv'
+file_path = 'old/data18/results.csv'
 df = pd.read_csv(file_path)
 
 # Setting the aesthetic style of the plots
