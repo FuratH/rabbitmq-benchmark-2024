@@ -46,7 +46,7 @@ def plot_downtime_with_recovery_seconds(ax, intervals, y_position, label, color,
         recovery_time_seconds = (end - start).total_seconds()
         recovery_str = f"{recovery_time_seconds:.2f} sec"
         line = ax.hlines(y_position, start_offset, end_offset, colors=color, lw=4, zorder=z_order)
-        ax.text(start_offset, y_position + 0.05, f'{label}\n{recovery_str}', color=color, fontsize=10, verticalalignment='bottom', zorder=z_order + 1)
+        ax.text(start_offset, y_position + 0.01, f'{label}\n{recovery_str}', color=color, fontsize=10, verticalalignment='bottom', zorder=(z_order + 10))
 
 # Modified function to parse the new CSV file format
 def parse_messages_data(file_path, start_time):
@@ -70,10 +70,10 @@ def was_master_during_downtime(intervals, df_messages, node_name, start_time):
     return master_downtimes
 
 # File paths
-file_path_node0 = 'data17/node0_5000_monitoring.log'
-file_path_node1 = 'data17/node1_5000_monitoring.log'
-file_path_node2 = 'data17/node2_5000_monitoring.log'
-file_path_messages = 'data17/results.csv'
+file_path_node0 = 'data18/node0_5000_monitoring.log'
+file_path_node1 = 'data18/node1_5000_monitoring.log'
+file_path_node2 = 'data18/node2_5000_monitoring.log'
+file_path_messages = 'data18/results.csv'
 
 # Parse each log file and get start times
 df_node0, start_time_node0 = parse_log(file_path_node0)
@@ -93,13 +93,13 @@ fig, ax1 = plt.subplots(figsize=(15, 8))
 
 # Plotting throughput first with specific zorder to ensure it's in the background
 ax2 = ax1.twinx()
-ax2.plot(df_messages['Timestamp'], df_messages['MessageSentThroughput (KB/s)'], label='Throughput (KB/s)', color='#cae1ea', alpha=0.5, zorder=1)
+ax2.plot(df_messages['Timestamp'], df_messages['MessageSentThroughput (KB/s)'], label='Throughput (KB/s)', color='blue', alpha=0.5, zorder=1)
 ax2.set_ylabel('Throughput (KB/s)', color='black')
 
 # Plotting downtime intervals with the highest zorder to ensure they are in the foreground
-plot_downtime_with_recovery_seconds(ax1, correct_recovery_intervals_node0, 0.7, 'Node0', '#637173', start_time_node0, 5)
-plot_downtime_with_recovery_seconds(ax1, correct_recovery_intervals_node1, 0.5, 'Node1', '#637173', start_time_node1, 5)
-plot_downtime_with_recovery_seconds(ax1, correct_recovery_intervals_node2, 0.3, 'Node2', '#637173', start_time_node2, 5)
+plot_downtime_with_recovery_seconds(ax1, correct_recovery_intervals_node0, 0.4, 'Node0', 'red', start_time_node0, 5)
+plot_downtime_with_recovery_seconds(ax1, correct_recovery_intervals_node1, 0.3, 'Node1', 'blue', start_time_node1, 5)
+plot_downtime_with_recovery_seconds(ax1, correct_recovery_intervals_node2, 0.2, 'Node2', 'green', start_time_node2, 5)
 
 # Calculate and highlight master downtimes
 master_downtime_node0 = was_master_during_downtime(correct_recovery_intervals_node0, df_messages, 'node0', start_time_node0)
@@ -108,11 +108,11 @@ master_downtime_node2 = was_master_during_downtime(correct_recovery_intervals_no
 
 # Highlighting master node downtimes
 for start, end in master_downtime_node0:
-    ax1.axvspan(start, end, alpha=0.5, color='#eae5ca', label='Node0 Master Down' if 'Node0 Master Down' not in ax1.get_legend_handles_labels()[1] else None, zorder=2)
+    ax1.axvspan(start, end, alpha=0.3, color='orange', label='Node0 Master Down' if 'Node0 Master Down' not in ax1.get_legend_handles_labels()[1] else None, zorder=0)
 for start, end in master_downtime_node1:
-    ax1.axvspan(start, end, alpha=0.5, color='#caeace', label='Node1 Master Down' if 'Node1 Master Down' not in ax1.get_legend_handles_labels()[1] else None, zorder=2)
+    ax1.axvspan(start, end, alpha=0.3, color='purple', label='Node1 Master Down' if 'Node1 Master Down' not in ax1.get_legend_handles_labels()[1] else None, zorder=0)
 for start, end in master_downtime_node2:
-    ax1.axvspan(start, end, alpha=0.5, color='#cdd0ea', label='Node2 Master Down' if 'Node2 Master Down' not in ax1.get_legend_handles_labels()[1] else None, zorder=2)
+    ax1.axvspan(start, end, alpha=0.3, color='pink', label='Node2 Master Down' if 'Node2 Master Down' not in ax1.get_legend_handles_labels()[1] else None, zorder=0)
 
 # Formatting the plot
 ax1.set_ylim(0, 1)
@@ -128,7 +128,7 @@ ax1.grid(True)
 # Adjusting legends to incorporate both axes
 handles1, labels1 = ax1.get_legend_handles_labels()
 handles2, labels2 = ax2.get_legend_handles_labels()
-ax1.legend(handles1 + handles2, labels1 + labels2, loc='upper right')
+ax1.legend(handles1 + handles2, labels1 + labels2, loc='upper left')
 
 plt.tight_layout()
 plt.show()

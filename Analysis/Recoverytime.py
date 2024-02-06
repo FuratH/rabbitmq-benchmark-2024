@@ -99,8 +99,8 @@ avg_recovery_non_master = calculate_average_recovery_time(non_master_intervals)
 fig, ax = plt.subplots(figsize=(10, 6))
 nodes = ['Node0', 'Node1', 'Node2', 'Master', 'Non-Master']
 averages = [avg_recovery_node0, avg_recovery_node1, avg_recovery_node2, avg_recovery_master, avg_recovery_non_master]
-bars = ax.bar(nodes, averages, color=['#cae1ea', '#eae5ca', '#8da495', '#a48d9b', '#cdd0ea'])
-
+#bars = ax.bar(nodes, averages, color=['#cae1ea', '#eae5ca', '#8da495', '#a48d9b', '#cdd0ea'])
+bars = ax.bar(nodes, averages, color=['red', 'blue', 'green', 'orange', 'purple'])
 # Adding text annotations
 for bar in bars:
     yval = bar.get_height()
