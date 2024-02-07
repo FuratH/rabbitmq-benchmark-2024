@@ -1,0 +1,41 @@
+tasks:
+  - delay: 12
+    action: "slave"
+  - delay: 14
+    action: "master"
+  - delay: 18
+    action: "all"
+  - delay: 25
+    action: "slave"
+  - delay: 30
+    action: "master"
+  - delay: 40
+    action: "master"
+  - delay: 45
+    action: "slave"
+  - delay: 50
+    action: "all"
+  - delay: 55
+    action: "slave"
+
+workload:
+  name: "1MB10p10c60min"
+  messageSize: 1
+  producers: 10
+  consumers: 10
+  runtimeDurtationMinutes: 60
+  seed: 28072000
+
+connectionConfig:
+  amqpUris:
+    - "amqp://rabbitmq:password@loadbalancer:5672"
+  primaryBrokerUri: "amqp://rabbitmq:password@loadbalancer:5672"
+  apiUrl: "http://loadbalancer:15672"
+  queueName: "ha.queue"
+  projectId: "CSB-2023"
+  bucketName: "rabbitmq-benchmark-results"
+
+serverUrls:
+  - "http://node0:5000"
+  - "http://node1:5000"
+  - "http://node2:5000"

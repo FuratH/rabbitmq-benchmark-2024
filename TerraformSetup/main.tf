@@ -113,7 +113,7 @@ resource "google_compute_instance" "client" {
   }
 
    service_account {
-    email  = "57939934652-compute@developer.gserviceaccount.com"
+    email  = "email" # Create service account and add email otherwise the fileupload won't work
     scopes = ["cloud-platform"]
   }
 }

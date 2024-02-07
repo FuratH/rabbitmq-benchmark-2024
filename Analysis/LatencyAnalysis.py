@@ -3,15 +3,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-
-# Reading the CSV file
-file_path = 'old/data18/results.csv'
+file_path = 'run1/results.csv'
 df = pd.read_csv(file_path)
 
-# Setting the aesthetic style of the plots
 sns.set_style("whitegrid")
 
-##cae1ea', '#eae5ca', '#8da495', '#a48d9b', '#cdd0ea
+
 # Plotting Publish Latency Metrics Over Time
 plt.figure(figsize=(14, 6))
 plt.plot(df['TimeElapsed (s)'], df['PublishLatencyValueAtPercentile50 (ms)'], label='50th Percentile Publish Latency', color='#9CBEC4', linewidth=0.8)

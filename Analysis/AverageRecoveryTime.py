@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import re
 from datetime import datetime, timedelta
 
-# Function to parse a log file and extract intervals, and return the minimum timestamp
+
 def parse_log(file_path):
     with open(file_path, 'r') as file:
         data = file.readlines()
@@ -21,7 +21,7 @@ def parse_log(file_path):
     min_time = df['timestamp'].min()
     return df, min_time
 
-# Function to accurately calculate the recovery or runtime intervals
+
 def calculate_intervals(df, status_start, status_end):
     intervals = []
     in_interval = False
@@ -35,12 +35,12 @@ def calculate_intervals(df, status_start, status_end):
             in_interval = False
     return intervals
 
-# Function to calculate the average time from a list of intervals
+
 def calculate_average_time(intervals):
     total_time = sum([(end - start).total_seconds() for start, end in intervals])
     return total_time / len(intervals) if intervals else 0
 
-# Function to determine intervals during which a node was a master
+
 def determine_master_intervals(intervals, df_messages, node_name, start_time):
     master_intervals = []
     for start, end in intervals:
@@ -53,15 +53,15 @@ def determine_master_intervals(intervals, df_messages, node_name, start_time):
             master_intervals.append((start, end))
     return master_intervals
 
-# File paths for the original and second set of log files and results.csv
-file_paths = {
-    'node0': ['data17/node0_5000_monitoring.log', 'data18/node0_5000_monitoring.log', 'data19/node0_5000_monitoring.log'],
-    'node1': ['data17/node1_5000_monitoring.log', 'data18/node1_5000_monitoring.log', 'data19/node1_5000_monitoring.log'],
-    'node2': ['data17/node2_5000_monitoring.log', 'data18/node2_5000_monitoring.log',  'data19/node2_5000_monitoring.log']
-}
-file_path_messages = ['data17/results.csv', 'data18/results.csv', 'data19/results.csv']
 
-# Parse log files and combine DataFrames
+file_paths = {
+    'node0': ['run1/node0_5000_monitoring.log', 'run2/node0_5000_monitoring.log', 'run3/node0_5000_monitoring.log'],
+    'node1': ['run1/node1_5000_monitoring.log', 'run2/node1_5000_monitoring.log', 'run3/node1_5000_monitoring.log'],
+    'node2': ['run1/node2_5000_monitoring.log', 'run2/node2_5000_monitoring.log',  'run3/node2_5000_monitoring.log']
+}
+file_path_messages = ['run1/results.csv', 'run2/results.csv', 'run3/results.csv']
+
+
 dfs_nodes = {}
 start_times = {}
 for node, paths in file_paths.items():
@@ -71,18 +71,18 @@ for node, paths in file_paths.items():
     dfs_nodes[node] = combined_df
     start_times[node] = min_time
 
-# Combine messages DataFrames
+
 df_messages_combined = pd.concat([pd.read_csv(f) for f in file_path_messages], ignore_index=True)
 df_messages_combined['masternode'] = df_messages_combined['masternode'].ffill()
 
-# Calculate runtime intervals and average runtimes for each node
+
 runtime_intervals = {}
 average_runtimes = {}
 for node, df_node in dfs_nodes.items():
     runtime_intervals[node] = calculate_intervals(df_node, 'active', 'unknown')
     average_runtimes[node] = calculate_average_time(runtime_intervals[node])
 
-# Determine master and non-master runtimes
+
 master_intervals = []
 non_master_intervals = []
 for node, intervals in runtime_intervals.items():
@@ -94,7 +94,7 @@ for node, intervals in runtime_intervals.items():
 avg_runtime_master = calculate_average_time(master_intervals)
 avg_runtime_non_master = calculate_average_time(non_master_intervals)
 
-# Plotting the average runtimes with annotations
+
 fig, ax = plt.subplots(figsize=(10, 6))
 categories = ['Master', 'Non-Master']
 averages = [avg_runtime_master, avg_runtime_non_master]

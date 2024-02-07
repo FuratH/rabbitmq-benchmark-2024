@@ -56,10 +56,10 @@ def was_master_during_downtime(intervals, df_messages, node_name, start_time):
     return master_downtimes
 
 # File paths
-file_path_node0 = 'data17/node0_5000_monitoring.log'
-file_path_node1 = 'data17/node1_5000_monitoring.log'
-file_path_node2 = 'data17/node2_5000_monitoring.log'
-file_path_messages = 'data17/results.csv'
+file_path_node0 = 'run3/node0_5000_monitoring.log'
+file_path_node1 = 'run3/node1_5000_monitoring.log'
+file_path_node2 = 'run3/node2_5000_monitoring.log'
+file_path_messages = 'run3/results.csv'
 
 # Parse each log file and get start times
 df_node0, start_time_node0 = parse_log(file_path_node0)
@@ -99,8 +99,8 @@ avg_recovery_non_master = calculate_average_recovery_time(non_master_intervals)
 fig, ax = plt.subplots(figsize=(10, 6))
 nodes = ['Node0', 'Node1', 'Node2', 'Master', 'Non-Master']
 averages = [avg_recovery_node0, avg_recovery_node1, avg_recovery_node2, avg_recovery_master, avg_recovery_non_master]
-#bars = ax.bar(nodes, averages, color=['#cae1ea', '#eae5ca', '#8da495', '#a48d9b', '#cdd0ea'])
-bars = ax.bar(nodes, averages, color=['red', 'blue', 'green', 'orange', 'purple'])
+bars = ax.bar(nodes, averages, color=['#cae1ea', '#eae5ca', '#8da495', '#a48d9b', '#cdd0ea'])
+#bars = ax.bar(nodes, averages, color=['red', 'blue', 'green', 'orange', 'purple'])
 # Adding text annotations
 for bar in bars:
     yval = bar.get_height()
