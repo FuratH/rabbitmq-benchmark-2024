@@ -51,7 +51,9 @@ def start_monitoring():
     if os.path.exists(log_file_path):
         os.remove(log_file_path)
 
+    app.logger.info("a")
     if monitoring_thread is None or not monitoring_thread.is_alive():
+        app.logger.info("b")
         monitoring_active = True
         monitoring_thread = threading.Thread(target=monitor_rabbitmq)
         monitoring_thread.start()
@@ -64,17 +66,21 @@ def start_monitoring():
 def stop_monitoring():
     global monitoring_active, monitoring_thread
 
+    app.logger.info("c")
     if monitoring_thread is None or not monitoring_thread.is_alive():
         return "Monitoring is not running", 400
 
+    app.logger.info("d")
     monitoring_active = False
 
     # Wait for the monitoring thread to finish
     if monitoring_thread.is_alive():
         monitoring_thread.join()
+        app.logger.info("e")
 
     log_file_path = "rabbitmq_monitor.log"
     if os.path.exists(log_file_path):
+        app.logger.info("f")
         return send_file(log_file_path, as_attachment=True)
     else:
         return "Log file does not exist", 404
